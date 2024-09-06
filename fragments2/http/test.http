@@ -1,0 +1,45 @@
+
+###
+GET http://localhost:3000/groups
+###
+GET http://localhost:3000/groups/e4db1fb4-f070-4672-9c87-43577e567af2
+###
+POST http://localhost:3000/groups
+Content-Type: application/json
+
+{
+  "name": "즐거운 모임",
+  "password": "1234",
+  "imageUrl": "",
+  "isPublic": true,
+  "introduction" : "하이!"
+}
+###
+PATCH http://localhost:3000/groups/a0834791-49a1-47e5-824a-152a3f570bc5
+Content-Type: application/json
+
+{
+  "name": "20대들의 모임이다",
+  "password": "4567",
+  "imageUrl": "",
+  "isPublic": false,
+  "introduction": "하하하하"
+}
+###
+POST http://localhost:3000/groups/a0834791-49a1-47e5-824a-152a3f570bc5/posts
+Content-Type: application/json
+
+{
+  "nickname": "김군",
+  "title": "오늘의 추억",
+  "content": "아 재밌었다",
+  "postPassword": "qwer",
+  "imageUrl": "",
+  "location": "서울",
+  "moment": "2024-03-25",
+  "isPublic": true
+}
+###
+GET http://localhost:3000/groups/a0834791-49a1-47e5-824a-152a3f570bc5/posts
+###
+GET http://localhost:3000/groups/e4db1fb4-f070-4672-9c87-43577e567af2/posts

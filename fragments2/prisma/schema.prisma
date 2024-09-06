@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Group {
+  id           String   @id @default(uuid())
+  name         String
+  password     String
+  imageUrl     String?
+  isPublic     Boolean
+  likeCount    Int
+  introduction String
+  postCount    Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  posts        Post[] //그룹과 게시글 1:N 관계
+}
+
+model Post {
+  id           String    @id @default(uuid())
+  nickname     String
+  title        String
+  content      String
+  postPassword String
+  imageUrl     String?
+  //tags         String[]
+  location     String
+  moment       DateTime
+  isPublic     Boolean
+  likeCount    Int
+  commentCount Int
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  group        Group     @relation(fields: [groupId], references: [id])
+  groupId      String
+  comments     Comment[] //게시글과 댓글 1:N 관계
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  nickname  String
+  content   String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+}
+
