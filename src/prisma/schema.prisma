@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url = env("DATABASE_URL")
+}
+
+model Group {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  password     String
+  imageUrl     String?
+  isPublic     Boolean
+  likeCount    Int
+  introduction String
+  postCount    Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  posts        Post[]
+}
+
+model Post {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  nickname     String
+  title        String
+  content      String
+  postPassword String
+  imageUrl     String?
+  tags         String[]
+  location     String
+  moment       DateTime
+  isPublic     Boolean
+  likeCount    Int
+  commentCount Int
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  group        Group     @relation(fields: [groupId], references: [id])
+  groupId      String @db.ObjectId
+  comments     Comment[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nickname  String
+  content   String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String @db.ObjectId
+}
+
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>조각집 - 그룹 관리</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>조각집</h1>
+  </header>
+
+  <main>
+    <section id="group-list-section">
+      <h2>그룹 목록</h2>
+      <button id="create-group-btn">그룹 만들기</button>
+      <div id="group-list"></div>
+    </section>
+
+    <!-- 그룹 만들기 폼 -->
+    <section id="group-create-section" style="display: none;">
+      <h2>그룹 만들기</h2>
+      <form id="group-create-form">
+        <label for="name">그룹명:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">그룹 소개:</label>
+        <textarea id="description" name="description"></textarea>
+
+        <label for="isPublic">공개 여부:</label>
+        <input type="checkbox" id="isPublic" name="isPublic">
+
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="image">대표 이미지:</label>
+        <input type="file" id="image" name="image">
+
+        <button type="submit">만들기</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
